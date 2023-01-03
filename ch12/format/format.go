@@ -34,6 +34,7 @@ func formatAtom(v reflect.Value) string {
 	case reflect.String:
 		return strconv.Quote(v.String())
 	case reflect.Chan, reflect.Func, reflect.Ptr, reflect.Slice, reflect.Map:
+		//打印类型和十六进制的引用地址
 		return v.Type().String() + " 0x" +
 			strconv.FormatUint(uint64(v.Pointer()), 16)
 	default: // reflect.Array, reflect.Struct, reflect.Interface

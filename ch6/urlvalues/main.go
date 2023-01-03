@@ -25,6 +25,7 @@ func (v Values) Get(key string) string {
 // Add adds the value to key.
 // It appends to any existing values associated with key.
 func (v Values) Add(key, value string) {
+	//但在方法想要修改引用本身时是不会影响原始值的，比如把他置换为nil，或者让这个引用指向了其它的对象，调用方都不会受影响
 	v[key] = append(v[key], value)
 }
 //!-values
@@ -46,8 +47,9 @@ func main() {
 	fmt.Println(m.Get("item")) // "1"      (first value)
 	fmt.Println(m["item"])     // "[1 2]"  (direct map access)
 
+	//这个部分非常有意思
 	m = nil
-	fmt.Println(m.Get("item")) // ""
+	fmt.Println(m.Get("item")) // "" 等价地将这个操作写成Value(nil).Get("item")，但是如果你直接写nil.Get("item")的话是无法通过编译的
 	m.Add("item", "3")         // panic: assignment to entry in nil map
 	//!-main
 }

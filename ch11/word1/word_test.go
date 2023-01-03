@@ -8,6 +8,7 @@ import "testing"
 
 func TestPalindrome(t *testing.T) {
 	if !IsPalindrome("detartrated") {
+		//使用t.Error报告失败信息
 		t.Error(`IsPalindrome("detartrated") = false`)
 	}
 	if !IsPalindrome("kayak") {
@@ -36,6 +37,7 @@ func TestFrenchPalindrome(t *testing.T) {
 func TestCanalPalindrome(t *testing.T) {
 	input := "A man, a plan, a canal: Panama"
 	if !IsPalindrome(input) {
+		//Errorf函数提供格式化
 		t.Errorf(`IsPalindrome(%q) = false`, input)
 	}
 }

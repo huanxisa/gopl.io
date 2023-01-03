@@ -48,6 +48,7 @@ func main() {
 		tick = time.Tick(500 * time.Millisecond)
 	}
 	var nfiles, nbytes int64
+	//	这个标签代表的是最外层的循环
 loop:
 	for {
 		select {

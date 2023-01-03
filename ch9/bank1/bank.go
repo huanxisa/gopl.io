@@ -19,6 +19,7 @@ func teller() {
 		select {
 		case amount := <-deposits:
 			balance += amount
+		//	todo：这个干嘛
 		case balances <- balance:
 		}
 	}

@@ -17,8 +17,11 @@ import (
 
 func main() {
 	db := database{"shoes": 50, "socks": 5}
+	//net/http包提供了一个全局的ServeMux实例DefaultServerMux和包级别的http.Handle和http.HandleFunc函数
+	//无需像3中需要声明一个http.NewServeMux()
 	http.HandleFunc("/list", db.list)
 	http.HandleFunc("/price", db.price)
+	//http.ListenAndServe("localhost:8000", mux) 下面的nil使用了全局的mux
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
 }
 

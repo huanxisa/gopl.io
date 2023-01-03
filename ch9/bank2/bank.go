@@ -8,6 +8,7 @@ package bank
 
 //!+
 var (
+	//如果是锁，需要对于保护对象进行说明
 	sema    = make(chan struct{}, 1) // a binary semaphore guarding balance
 	balance int
 )

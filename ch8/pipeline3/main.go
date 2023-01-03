@@ -17,6 +17,7 @@ func counter(out chan<- int) {
 	close(out)
 }
 
+// chan<- 代表只往chan中写入，<-chan 代表只从chan中接收
 func squarer(out chan<- int, in <-chan int) {
 	for v := range in {
 		out <- v * v

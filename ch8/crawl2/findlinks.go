@@ -20,6 +20,7 @@ import (
 //!+sema
 // tokens is a counting semaphore used to
 // enforce a limit of 20 concurrent requests.
+//信号量
 var tokens = make(chan struct{}, 20)
 
 func crawl(url string) []string {
@@ -48,6 +49,7 @@ func main() {
 	// Crawl the web concurrently.
 	seen := make(map[string]bool)
 	for ; n > 0; n-- {
+		//不会有循环问题
 		list := <-worklist
 		for _, link := range list {
 			if !seen[link] {

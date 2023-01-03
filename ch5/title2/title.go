@@ -35,6 +35,7 @@ func title(url string) error {
 	if err != nil {
 		return err
 	}
+	//主要在这个地方声明
 	defer resp.Body.Close()
 
 	ct := resp.Header.Get("Content-Type")

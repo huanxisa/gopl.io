@@ -16,6 +16,7 @@ import (
 func main() {
 	const templ = `<p>A: {{.A}}</p><p>B: {{.B}}</p>`
 	t := template.Must(template.New("escape").Parse(templ))
+	//A是一个普通字符串，B是一个信任的template.HTML字符串类型。
 	var data struct {
 		A string        // untrusted plain text
 		B template.HTML // trusted HTML

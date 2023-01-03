@@ -20,6 +20,7 @@ func main() {
 		log.Fatal(err)
 	}
 	defer conn.Close()
+	//这个程序会从连接中读取数据，并将读到的内容写到标准输出中，直到遇到end of file的条件或者发生错误。
 	mustCopy(os.Stdout, conn)
 }
 

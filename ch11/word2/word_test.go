@@ -75,6 +75,7 @@ import "math/rand"
 //!+random
 // randomPalindrome returns a palindrome whose length and contents
 // are derived from the pseudo-random number generator rng.
+// 只要日志中简单地记录随机数种子即可（像上面的方式）。有了这些随机数初始化种子，我们可以很容易修改测试代码以重现失败的随机测试。
 func randomPalindrome(rng *rand.Rand) string {
 	n := rng.Intn(25) // random length up to 24
 	runes := make([]rune, n)

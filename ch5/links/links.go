@@ -33,12 +33,14 @@ func Extract(url string) ([]string, error) {
 	}
 
 	var links []string
+	//仅仅将visit函数拆成下面的两个函数
 	visitNode := func(n *html.Node) {
 		if n.Type == html.ElementNode && n.Data == "a" {
 			for _, a := range n.Attr {
 				if a.Key != "href" {
 					continue
 				}
+				//解析后，这些连接以绝对路径的形式存在，可以直接被http.Get访问。
 				link, err := resp.Request.URL.Parse(a.Val)
 				if err != nil {
 					continue // ignore bad URLs

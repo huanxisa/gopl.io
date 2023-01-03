@@ -36,6 +36,7 @@ func main() {
 			log.Print(err) // e.g., connection aborted
 			continue
 		}
+		//使用协程处理并发
 		go handleConn(conn) // handle connections concurrently
 	}
 	//!-

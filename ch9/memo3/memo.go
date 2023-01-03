@@ -27,12 +27,13 @@ func New(f Func) *Memo {
 	return &Memo{f: f, cache: make(map[string]result)}
 }
 
-//!+
+//!+ 这玩意不会有问题？
 
 func (memo *Memo) Get(key string) (value interface{}, err error) {
 	memo.mu.Lock()
 	res, ok := memo.cache[key]
 	memo.mu.Unlock()
+	//todo： 这个地方我觉得应该是有问题的，但是使用-race却通过了test.奇怪
 	if !ok {
 		res.value, res.err = memo.f(key)
 

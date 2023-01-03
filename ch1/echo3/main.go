@@ -14,6 +14,7 @@ import (
 
 //!+
 func main() {
+	//使用strings包减少字符串拼接开销。
 	fmt.Println(strings.Join(os.Args[1:], " "))
 }
 

@@ -38,9 +38,10 @@ func main() {
 	// Start with the command-line arguments.
 	go func() { worklist <- os.Args[1:] }()
 
-	// Crawl the web concurrently.
+	// Crawl the web concurrently. 会造成资源耗尽
 	seen := make(map[string]bool)
 	for list := range worklist {
+		//如果两个链接的页面有相互引用，将不会停止
 		for _, link := range list {
 			if !seen[link] {
 				seen[link] = true

@@ -13,8 +13,10 @@ import (
 
 //!+
 func main() {
+	//展示动画
 	go spinner(100 * time.Millisecond)
 	const n = 45
+	//算完直接结束，连带这动画也结束
 	fibN := fib(n) // slow
 	fmt.Printf("\rFibonacci(%d) = %d\n", n, fibN)
 }

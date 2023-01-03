@@ -71,8 +71,16 @@ func display(path string, v reflect.Value) {
 		}
 	case reflect.Ptr:
 		if v.IsNil() {
+			//IsNil方法来显式地测试一个空指针
 			fmt.Printf("%s = nil\n", path)
 		} else {
+			//通过Elem()获取元素
+
+			//Display("&i", &i)
+			// Output:
+			// Display &i (*interface {}):
+			// (*&i).type = int
+			// (*&i).value = 3
 			display(fmt.Sprintf("(*%s)", path), v.Elem())
 		}
 	case reflect.Interface:

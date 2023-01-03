@@ -20,6 +20,7 @@ func main() {
 
 func printStack() {
 	var buf [4096]byte
+	//获取运行时的堆栈信息
 	n := runtime.Stack(buf[:], false)
 	os.Stdout.Write(buf[:n])
 }

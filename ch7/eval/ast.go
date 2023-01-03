@@ -13,6 +13,8 @@ type Expr interface {
 
 //!+ast
 
+//主要为了定义一下操作类型，二元，一元，函数调用
+
 // A Var identifies a variable, e.g., x.
 type Var string
 

@@ -9,6 +9,7 @@ package main
 
 import "fmt"
 
+//在包一级声明语句声明的名字可在整个包对应的每个源文件中访问
 const boilingF = 212.0
 
 func main() {

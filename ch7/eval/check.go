@@ -9,7 +9,7 @@ import (
 )
 
 //!+Check
-
+// 为了实现ast.go中
 func (v Var) Check(vars map[Var]bool) error {
 	vars[v] = true
 	return nil

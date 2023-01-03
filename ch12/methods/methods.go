@@ -18,7 +18,7 @@ func Print(x interface{}) {
 	v := reflect.ValueOf(x)
 	t := v.Type()
 	fmt.Printf("type %s\n", t)
-
+	//从reflect.Value获取全部方法以及方法数量。
 	for i := 0; i < v.NumMethod(); i++ {
 		methType := v.Method(i).Type()
 		fmt.Printf("func (%s) %s%s\n", t, t.Method(i).Name,

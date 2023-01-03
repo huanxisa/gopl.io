@@ -37,13 +37,17 @@ void bz2free(bz_stream* s) { free(s); }
 */
 import "C"
 
+//行语句会让Go编译程序在编译之前先运行cgo工具。
+//import "C"语句前紧挨着的注释是对应cgo的特殊语法，对应必要的构建参数选项和C语言代码
+//CFLAGS和LDFLAGS分别对应传给C语言编译器的编译参数和链接器参数
 import (
 	"io"
 	"unsafe"
 )
 
 type writer struct {
-	w      io.Writer // underlying output stream
+	w io.Writer // underlying output stream
+	//全部都是以C.x语法访问。其中C.uint类型和Go语言的uint类型并不相同，即使它们具有相同的大小也是不同的类型。
 	stream *C.bz_stream
 	outbuf [64 * 1024]byte
 }

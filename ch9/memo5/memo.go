@@ -56,7 +56,7 @@ func (memo *Memo) Close() { close(memo.requests) }
 //!-get
 
 //!+monitor
-
+//todo：细品这个程序的设计
 func (memo *Memo) server(f Func) {
 	cache := make(map[string]*entry)
 	for req := range memo.requests {

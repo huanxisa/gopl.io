@@ -59,6 +59,7 @@ func (f *celsiusFlag) Set(s string) error {
 // The flag argument must have a quantity and a unit, e.g., "100C".
 func CelsiusFlag(name string, value Celsius, usage string) *Celsius {
 	f := celsiusFlag{value}
+	//关键是这个包调用了这个方法，而这个接口只是为了满足这个接口类型而声明出来的。
 	flag.CommandLine.Var(&f, name, usage)
 	return &f.Celsius
 }

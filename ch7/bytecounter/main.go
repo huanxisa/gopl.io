@@ -14,6 +14,7 @@ import (
 
 type ByteCounter int
 
+//注意这个地方无需说自己实现了哪个借口，只要实现方法即可
 func (c *ByteCounter) Write(p []byte) (int, error) {
 	*c += ByteCounter(len(p)) // convert int to ByteCounter
 	return len(p), nil
@@ -29,6 +30,7 @@ func main() {
 
 	c = 0 // reset the counter
 	var name = "Dolly"
+	//todo 这个地方为什么要传入地址呢？什么时候该传入地址，什么时候传入副本？
 	fmt.Fprintf(&c, "hello, %s", name)
 	fmt.Println(c) // "12", = len("hello, Dolly")
 	//!-main

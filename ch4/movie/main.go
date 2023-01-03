@@ -14,8 +14,11 @@ import (
 
 //!+
 type Movie struct {
-	Title  string
-	Year   int  `json:"released"`
+	// 注意到这里面只有大写才会被编码
+	Title string
+	//注意后面采用的是`这个原生字符串面值的形式书写
+	Year int `json:"released"`
+	//omitempty选项，表示当Go语言结构体成员为空或零值时不生成该JSON对象
 	Color  bool `json:"color,omitempty"`
 	Actors []string
 }
@@ -34,7 +37,7 @@ var movies = []Movie{
 
 func main() {
 	{
-		//!+Marshal
+		//!+Marshal 将go->json 产生紧凑的表示
 		data, err := json.Marshal(movies)
 		if err != nil {
 			log.Fatalf("JSON marshaling failed: %s", err)
@@ -44,7 +47,7 @@ func main() {
 	}
 
 	{
-		//!+MarshalIndent
+		//!+MarshalIndent 产生易读的形式
 		data, err := json.MarshalIndent(movies, "", "    ")
 		if err != nil {
 			log.Fatalf("JSON marshaling failed: %s", err)
@@ -52,7 +55,7 @@ func main() {
 		fmt.Printf("%s\n", data)
 		//!-MarshalIndent
 
-		//!+Unmarshal
+		//!+Unmarshal 解码操作：json->go,可以忽略某些成员变量
 		var titles []struct{ Title string }
 		if err := json.Unmarshal(data, &titles); err != nil {
 			log.Fatalf("JSON unmarshaling failed: %s", err)

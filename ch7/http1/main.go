@@ -25,11 +25,17 @@ func (d dollars) String() string { return fmt.Sprintf("$%.2f", d) }
 
 type database map[string]dollars
 
+//个handler会遍历整个map并输出物品信息
 func (db database) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	for item, price := range db {
 		fmt.Fprintf(w, "%s: %s\n", item, price)
 	}
 }
+
+//go build gopl.io/ch1/fetch
+//./fetch http://localhost:8000
+//shoes: $50.00
+//socks: $5.00
 
 //!-main
 

@@ -40,6 +40,7 @@ func main() {
 		go func() {
 			for link := range unseenLinks {
 				foundLinks := crawl(link)
+				//这个协程只负责发送队列，然后外层的协程
 				go func() { worklist <- foundLinks }()
 			}
 		}()

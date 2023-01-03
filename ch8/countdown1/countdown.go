@@ -14,10 +14,13 @@ import (
 //!+
 func main() {
 	fmt.Println("Commencing countdown.")
+	//这个返回一个channel,会周期性地像一个节拍器一样向这个channel发送事件,节拍控制交给了time这个进程
 	tick := time.Tick(1 * time.Second)
+	//等待10个节拍
 	for countdown := 10; countdown > 0; countdown-- {
 		fmt.Println(countdown)
 		<-tick
+
 	}
 	launch()
 }

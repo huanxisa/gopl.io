@@ -44,7 +44,7 @@ func makeThumbnails3(filenames []string) {
 		go func(f string) {
 			thumbnail.ImageFile(f) // NOTE: ignoring errors
 			ch <- struct{}{}
-		}(f)
+		}(f) //注意匿名函数中的循环变量快照问题
 	}
 
 	// Wait for goroutines to complete.
@@ -69,6 +69,8 @@ func makeThumbnails4(filenames []string) error {
 	}
 
 	for range filenames {
+		//这样剩下的worker goroutine在向这个channel中发送值时，都会永远地阻塞下去，并且永远都不会退出。这种情况叫做goroutine泄露
+		// 所以如何结束其他协程？
 		if err := <-errors; err != nil {
 			return err // NOTE: incorrect: goroutine leak!
 		}
@@ -88,17 +90,19 @@ func makeThumbnails5(filenames []string) (thumbfiles []string, err error) {
 		thumbfile string
 		err       error
 	}
-
+	//这个地方声明了一个缓冲
 	ch := make(chan item, len(filenames))
 	for _, f := range filenames {
 		go func(f string) {
 			var it item
 			it.thumbfile, it.err = thumbnail.ImageFile(f)
+			//这个部分就永远不会阻塞，保证协程能够执行完
 			ch <- it
 		}(f)
 	}
 
 	for range filenames {
+
 		it := <-ch
 		if it.err != nil {
 			return nil, it.err
@@ -116,8 +120,9 @@ func makeThumbnails5(filenames []string) (thumbfiles []string, err error) {
 // It returns the number of bytes occupied by the files it creates.
 func makeThumbnails6(filenames <-chan string) int64 {
 	sizes := make(chan int64)
-	var wg sync.WaitGroup // number of working goroutines
+	var wg sync.WaitGroup // 创建了一个WaitGroup
 	for f := range filenames {
+		//必须在worker goroutine开始之前调用，而不是在goroutine中；否则的话我们没办法确定Add是在"closer" goroutine调用Wait之前被调用。
 		wg.Add(1)
 		// worker
 		go func(f string) {

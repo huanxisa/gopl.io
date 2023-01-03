@@ -73,6 +73,7 @@ func startElement(n *html.Node) {
 func endElement(n *html.Node) {
 	if n.Type == html.ElementNode {
 		depth--
+		//%*s中的*会在字符串之前填充一些空格。在例子中，每次输出会先填充depth*2数量的空格
 		fmt.Printf("%*s</%s>\n", depth*2, "", n.Data)
 	}
 }

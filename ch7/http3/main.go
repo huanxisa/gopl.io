@@ -21,7 +21,10 @@ func (d dollars) String() string { return fmt.Sprintf("$%.2f", d) }
 
 func main() {
 	db := database{"shoes": 50, "socks": 5}
+	//net/http包提供了一个请求多路器ServeMux来简化URL和handlers的联系。一个ServeMux将一批http.Handler聚集到一个单一的http.Handler中。
 	mux := http.NewServeMux()
+	//http.HandlerFunc负责将db的方法值转换为Handler类型。
+	//细节可以看到type HandlerFunc func(ResponseWriter, *Request) 这个定义将其定义为方法值
 	mux.Handle("/list", http.HandlerFunc(db.list))
 	mux.Handle("/price", http.HandlerFunc(db.price))
 	log.Fatal(http.ListenAndServe("localhost:8000", mux))

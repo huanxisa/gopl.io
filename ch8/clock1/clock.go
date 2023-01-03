@@ -25,6 +25,7 @@ func main() {
 			log.Print(err) // e.g., connection aborted
 			continue
 		}
+		//关键就是这个只能同一个时刻处理一个请求，如果有两个请求，其中一个必须等待
 		handleConn(conn) // handle one connection at a time
 	}
 }

@@ -8,7 +8,8 @@ package treesort
 
 //!+
 type tree struct {
-	value       int
+	value int
+	// 不能自己嵌套自己，但是可以嵌套自己的指针
 	left, right *tree
 }
 
@@ -18,6 +19,7 @@ func Sort(values []int) {
 	for _, v := range values {
 		root = add(root, v)
 	}
+	// todo: 这个地方是啥意思？ values[:0]?
 	appendValues(values[:0], root)
 }
 

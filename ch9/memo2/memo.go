@@ -29,7 +29,7 @@ type Memo struct {
 	cache map[string]result
 }
 
-// Get is concurrency-safe.
+// Get is concurrency-safe. 加个锁
 func (memo *Memo) Get(key string) (value interface{}, err error) {
 	memo.mu.Lock()
 	res, ok := memo.cache[key]

@@ -22,6 +22,7 @@ func main() {
 			fmt.Fprintf(os.Stderr, "cf: %v\n", err)
 			os.Exit(1)
 		}
+		//使用其他包中的对象
 		f := tempconv.Fahrenheit(t)
 		c := tempconv.Celsius(t)
 		fmt.Printf("%s = %s, %s = %s\n",

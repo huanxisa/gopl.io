@@ -26,6 +26,7 @@ func main() {
 			fmt.Fprintf(os.Stderr, "xmlselect: %v\n", err)
 			os.Exit(1)
 		}
+		//主要是展示switch怎么使用
 		switch tok := tok.(type) {
 		case xml.StartElement:
 			stack = append(stack, tok.Name.Local) // push

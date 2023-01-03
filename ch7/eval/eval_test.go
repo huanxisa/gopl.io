@@ -43,6 +43,7 @@ func TestEval(t *testing.T) {
 		got := fmt.Sprintf("%.6g", expr.Eval(test.env))
 		fmt.Printf("\t%v => %s\n", test.env, got)
 		if got != test.want {
+			// 这个会报告一个错误
 			t.Errorf("%s.Eval() in %v = %q, want %q\n",
 				test.expr, test.env, got, test.want)
 		}

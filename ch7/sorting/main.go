@@ -54,7 +54,7 @@ func printTracks(tracks []*Track) {
 
 //!-printTracks
 
-//!+artistcode
+//!+artistcode 将行为封装维对象，牛皮
 type byArtist []*Track
 
 func (x byArtist) Len() int           { return len(x) }
@@ -78,6 +78,7 @@ func main() {
 	printTracks(tracks)
 
 	fmt.Println("\nReverse(byArtist):")
+	//逆序排序
 	sort.Sort(sort.Reverse(byArtist(tracks)))
 	printTracks(tracks)
 

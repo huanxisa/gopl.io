@@ -13,6 +13,8 @@ import (
 
 //!+env
 
+//定义ast.go中声明的类型实现Expr中的Eval方法
+
 type Env map[Var]float64
 
 //!-env

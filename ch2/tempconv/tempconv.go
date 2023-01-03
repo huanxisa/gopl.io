@@ -4,6 +4,7 @@
 //!+
 
 // Package tempconv performs Celsius and Fahrenheit conversions.
+//如果包注释很大，通常会放到一个独立的doc.go文件中。
 package tempconv
 
 import "fmt"

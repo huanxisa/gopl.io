@@ -5,6 +5,10 @@
 //!+main
 
 // Findlinks1 prints the links in an HTML document read from standard input.
+//这样使用程序：
+//$ go build gopl.io/ch1/fetch
+//$ go build gopl.io/ch5/findlinks1
+//$ ./fetch https://golang.org | ./findlinks1
 package main
 
 import (
@@ -20,6 +24,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "findlinks1: %v\n", err)
 		os.Exit(1)
 	}
+	// visit是说明递归的重点，但是注意这里传入的第一个参数居然是nil,然后整个程序居然不出错！
 	for _, link := range visit(nil, doc) {
 		fmt.Println(link)
 	}

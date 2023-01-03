@@ -17,6 +17,7 @@ func main() {
 	db := database{"shoes": 50, "socks": 5}
 	mux := http.NewServeMux()
 	//!+main
+	//等价于http3中的写法mux.Handle("/list", http.HandlerFunc(db.list))
 	mux.HandleFunc("/list", db.list)
 	mux.HandleFunc("/price", db.price)
 	//!-main

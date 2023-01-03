@@ -55,6 +55,7 @@ func findLinks(url string) ([]string, error) {
 		return nil, err
 	}
 	if resp.StatusCode != http.StatusOK {
+		// 在findlinks中，我们必须确保resp.Body被关闭，释放网络资源。虽然Go的垃圾回收机制会回收不被使用的内存，但是这不包括操作系统层面的资源，比如打开的文件、网络连接。因此我们必须显式的释放这些资源。
 		resp.Body.Close()
 		return nil, fmt.Errorf("getting %s: %s", url, resp.Status)
 	}

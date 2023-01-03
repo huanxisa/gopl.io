@@ -22,6 +22,7 @@ var done = make(chan struct{})
 
 func cancelled() bool {
 	select {
+	//当 channel 已关闭且 channel缓存区为空时，继续从 channel 接收消息会得到一个对应类型的零值。
 	case <-done:
 		return true
 	default:
@@ -95,6 +96,7 @@ func printDiskUsage(nfiles, nbytes int64) {
 //!+4
 func walkDir(dir string, n *sync.WaitGroup, fileSizes chan<- int64) {
 	defer n.Done()
+	//对于检查取消状态，直接不做任何事，但是这样我觉得是有问题的，这个cancelled能完成这样的事情吗？
 	if cancelled() {
 		return
 	}

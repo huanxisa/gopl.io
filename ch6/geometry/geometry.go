@@ -18,6 +18,7 @@ func Distance(p, q Point) float64 {
 
 // same thing, but as a method of the Point type
 func (p Point) Distance(q Point) float64 {
+	// 所以保持其在方法间传递时的一致性和简短性是不错的主意。这里的建议是可以使用其类型的第一个字母，比如这里使用了Point的首字母p。
 	return math.Hypot(q.X-p.X, q.Y-p.Y)
 }
 
@@ -29,6 +30,8 @@ func (p Point) Distance(q Point) float64 {
 type Path []Point
 
 // Distance returns the distance traveled along the path.
+//Path是一个命名的slice类型，而不是Point那样的struct类型，然而我们依然可以为它定义方法。Go和很多其它的面向对象的语言不太一样。
+//只要这个命名类型的底层类型不是指针或者interface。
 func (path Path) Distance() float64 {
 	sum := 0.0
 	for i := range path {

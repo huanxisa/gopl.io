@@ -44,6 +44,7 @@ func main() {
 func topoSort(m map[string][]string) []string {
 	var order []string
 	seen := make(map[string]bool)
+	//注意这个地方如果不分为两步写，我们无法递归的调用这个匿名函数
 	var visitAll func(items []string)
 
 	visitAll = func(items []string) {

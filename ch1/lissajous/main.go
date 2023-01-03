@@ -6,6 +6,7 @@
 //!+main
 
 // Lissajous generates GIF animations of random Lissajous figures.
+//运行命令 ./lissajous > output.gif
 package main
 
 import (
@@ -27,9 +28,10 @@ import (
 )
 
 //!+main
-
+//当我们import了一个包路径包含有多个单词的package时，比如image/color（image和color两个单词），通常我们只需要用最后那个单词表示这个包就可以
 var palette = []color.Color{color.White, color.Black}
 
+//这个程序里的常量声明给出了一系列的常量值，常量是指在程序编译后运行时始终都不会变化的值
 const (
 	whiteIndex = 0 // first color in palette
 	blackIndex = 1 // next color in palette
@@ -57,6 +59,7 @@ func main() {
 }
 
 func lissajous(out io.Writer) {
+	//常量声明定义在函数体内部，那么这种常量就只能在函数体内用。目前常量声明的值必须是一个数字值、字符串或者一个固定的boolean值。
 	const (
 		cycles  = 5     // number of complete x oscillator revolutions
 		res     = 0.001 // angular resolution
@@ -77,6 +80,7 @@ func lissajous(out io.Writer) {
 				blackIndex)
 		}
 		phase += 0.1
+		//struct内部的变量可以以一个点（.）来进行访问
 		anim.Delay = append(anim.Delay, delay)
 		anim.Image = append(anim.Image, img)
 	}

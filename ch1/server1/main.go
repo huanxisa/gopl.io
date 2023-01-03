@@ -13,6 +13,7 @@ import (
 	"net/http"
 )
 
+// linux 后台启动命令 $ go run src/gopl.io/ch1/server1/main.go &
 func main() {
 	http.HandleFunc("/", handler) // each request calls handler
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))

@@ -30,7 +30,11 @@ func main() {
 
 	//!+
 	fmt.Println("Commencing countdown.  Press return to abort.")
+	//此种用法只能在声明周期贯穿整个程序时使用，下面是一种较为安全的做法
 	tick := time.Tick(1 * time.Second)
+	//ticker := time.NewTicker(1 * time.Second)
+	//<-ticker.C
+	//defer ticker.Stop()
 	for countdown := 10; countdown > 0; countdown-- {
 		fmt.Println(countdown)
 		select {
